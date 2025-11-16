@@ -281,7 +281,7 @@ def make_onion(f, g):
 
 ---
 
-### Q9: Ten-Pairs
+#### Q9: Ten-Pairs
 
 Write a function that takes a positive integer `n` and returns the number of ten-pairs it contains. A ten-pair is a pair of digits within `n` that sums to 10.
 
@@ -376,7 +376,7 @@ def ten_pairs(n):
 >
 > 	---
 
-
+11222
 
 
 
