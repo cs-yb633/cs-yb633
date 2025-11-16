@@ -153,17 +153,27 @@ window.onload = function() {{
     }}
 }};
 
-// 搜索
+// 搜索并跳转
 function searchContent() {{
     const q = document.getElementById("search").value.toLowerCase();
     const blocks = document.querySelectorAll(".content *");
+    let firstMatch = null;
+
     blocks.forEach(b => {{
         if (b.innerText && b.innerText.toLowerCase().includes(q)) {{
             b.style.background = "#2387ff44";
+            if (!firstMatch) {{
+                firstMatch = b;
+            }}
         }} else {{
             b.style.background = "transparent";
         }}
     }});
+
+    // 如果找到匹配项，跳转到第一个匹配项
+    if (firstMatch) {{
+        window.location.hash = firstMatch.id;
+    }}
 }}
 
 // 折叠目录

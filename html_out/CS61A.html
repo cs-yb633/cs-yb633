@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>CS61A</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+/* ======= CSDIY 深蓝黑主题 ======= */
+:root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --text: #e6e6e6;
+    --border: #30363d;
+    --code-bg: #1c2128;
+
+    --accent: #2387ff;  /* 高级亮蓝 */
+}
+
+.dark {
+    --bg: #ffffff;
+    --bg2: #f7f7f7;
+    --text: #000000;
+    --border: #d0d0d0;
+    --code-bg: #f0f0f0;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ======= 顶部导航栏 ======= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 52px;
+    background: var(--bg2);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+}
+
+.nav-left {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-right input {
+    padding: 6px 10px;
+    width: 180px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* ======= 侧边栏 ======= */
+.sidebar {
+    margin-top: 52px;
+    width: 260px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    height: calc(100vh - 52px);
+    overflow-y: auto;
+    padding: 10px;
+    position: fixed;
+}
+
+.toc-item {
+    margin: 6px 0;
+    padding: 4px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toc-item:hover {
+    background: #2387ff33;
+}
+
+.toc-link {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.toc-h2 {
+    margin-left: 15px;
+    display: none;
+}
+
+.toc-h3 {
+    margin-left: 30px;
+    display: none;
+}
+
+/* ======= 内容区 ======= */
+.content {
+    margin-left: 280px;
+    padding: 20px;
+    margin-top: 52px;
+    width: calc(100% - 280px);
+    color: var(--text);
+}
+
+a {
+    color: var(--accent);
+}
+
+/* ======= 代码块 ======= */
+pre {
+    background: var(--code-bg);
+    padding: 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+</style>
+
+<script>
+// 切换主题
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+    localStorage.setItem("dark", document.body.classList.contains("dark"));
+}
+
+window.onload = function() {
+    if (localStorage.getItem("dark") === "true") {
+        document.body.classList.add("dark");
+    }
+};
+
+// 搜索并跳转
+function searchContent() {
+    const q = document.getElementById("search").value.toLowerCase();
+    const blocks = document.querySelectorAll(".content *");
+    let firstMatch = null;
+
+    blocks.forEach(b => {
+        if (b.innerText && b.innerText.toLowerCase().includes(q)) {
+            b.style.background = "#2387ff44";
+            if (!firstMatch) {
+                firstMatch = b;
+            }
+        } else {
+            b.style.background = "transparent";
+        }
+    });
+
+    // 如果找到匹配项，跳转到第一个匹配项
+    if (firstMatch) {
+        window.location.hash = firstMatch.id;
+    }
+}
+
+// 折叠目录
+function toggle(id) {
+    let group = document.querySelectorAll("." + id);
+    group.forEach(el => {
+        el.style.display = el.style.display === "none" ? "block" : "none";
+    });
+}
+</script>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="nav-left">My CS61A Notes</div>
+
+    <div class="nav-right">
+        <input id="search" onkeyup="searchContent()" placeholder="Search...">
+
+        <a href="https://github.com/MYB0503/CS61A" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22">
+        </a>
+
+        <button onclick="toggleDarkMode()">🌙/☀️</button>
+    </div>
+</div>
+
+<div class="sidebar">
+    <h3>📘 目录</h3>
+    
+            <div class="toc-item" onclick="toggle('h1-1')">
+                <a class="toc-link" href="#CS61A">📁 CS61A</a>
+            </div>
+            
+            <div class="toc-item toc-h2 h1-1" onclick="toggle('h1-1-h2-1')">
+                <a class="toc-link" href="#Week-4">📄 Week 4</a>
+            </div>
+            
+            <div class="toc-item toc-h3 h1-1-h2-1">
+                <a class="toc-link" href="#hw03：Recursion-and-Recurision-tree">- hw03：Recursion and Recurision tree</a>
+            </div>
+            
+            <div class="toc-item toc-h2 h1-1" onclick="toggle('h1-1-h2-2')">
+                <a class="toc-link" href="#Week5">📄 Week5</a>
+            </div>
+            
+            <div class="toc-item toc-h3 h1-1-h2-2">
+                <a class="toc-link" href="#lab03:-Recursion,-Python-Lists">- lab03: Recursion, Python Lists</a>
+            </div>
+            
+</div>
+
+<div class="content">
+<h1 id="CS61A">CS61A</h1>
+<h2 id="Week-4">Week 4</h2>
+<h3 id="hw03：Recursion-and-Recurision-tree">hw03：Recursion and Recurision tree</h3>
+<blockquote>
+<p>==<strong>递归树</strong>==: 一个函数调用自己，产生更小规模的子问题。</p>
+<ul>
+<li><strong>整数拆分</strong> 分为调用目前最大值和不调用目前最大值两种情况 加在一起便是其全部情况</li>
+</ul>
+</blockquote>
+<h4><strong>凑钱问题</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">next_smaller_dollar</span><span class="p">(</span><span class="n">bill</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Returns the next smaller bill in order."""</span>
+    <span class="k">if</span> <span class="n">bill</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">50</span>
+    <span class="k">if</span> <span class="n">bill</span> <span class="o">==</span> <span class="mi">50</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">20</span>
+    <span class="k">if</span> <span class="n">bill</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">10</span>
+    <span class="k">elif</span> <span class="n">bill</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">5</span>
+    <span class="k">elif</span> <span class="n">bill</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">count_dollars</span><span class="p">(</span><span class="n">total</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Return the number of ways to make change.</span>
+
+<span class="sd">    &gt;&gt;&gt; count_dollars(15)  # 15 $1 bills, 10 $1 &amp; 1 $5 bills, ... 1 $5 &amp; 1 $10 bills</span>
+<span class="sd">    6</span>
+<span class="sd">    &gt;&gt;&gt; count_dollars(10)  # 10 $1 bills, 5 $1 &amp; 1 $5 bills, 2 $5 bills, 10 $1 bills</span>
+<span class="sd">    4</span>
+<span class="sd">    &gt;&gt;&gt; count_dollars(20)  # 20 $1 bills, 15 $1 &amp; $5 bills, ... 1 $20 bill</span>
+<span class="sd">    10</span>
+<span class="sd">    &gt;&gt;&gt; count_dollars(45)  # How many ways to make change for 45 dollars?</span>
+<span class="sd">    44</span>
+<span class="sd">    &gt;&gt;&gt; count_dollars(100) # How many ways to make change for 100 dollars?</span>
+<span class="sd">    344</span>
+<span class="sd">    &gt;&gt;&gt; count_dollars(200) # How many ways to make change for 200 dollars?</span>
+<span class="sd">    3274</span>
+<span class="sd">    &gt;&gt;&gt; from construct_check import check</span>
+<span class="sd">    &gt;&gt;&gt; # ban iteration</span>
+<span class="sd">    &gt;&gt;&gt; check(SOURCE_FILE, 'count_dollars', ['While', 'For'])</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+        <span class="s2">"*** YOUR CODE HERE ***"</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">constrained_count</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">largest_bill</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">total</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">largest_bill</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="n">without_dollar_bill</span> <span class="o">=</span> <span class="n">constrained_count</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">next_smaller_dollar</span><span class="p">(</span><span class="n">largest_bill</span><span class="p">))</span>
+            <span class="n">with_dollar_bill</span> <span class="o">=</span> <span class="n">constrained_count</span><span class="p">(</span><span class="n">total</span> <span class="o">-</span> <span class="n">largest_bill</span><span class="p">,</span> <span class="n">largest_bill</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">without_dollar_bill</span> <span class="o">+</span> <span class="n">with_dollar_bill</span>
+        <span class="k">return</span> <span class="n">constrained_count</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>如上的凑钱问题与整数分解如出一辙</p>
+</blockquote>
+<hr/>
+<h4><strong>汉诺塔问题</strong></h4>
+<p>在汉诺塔游戏中，有 <strong>三根柱子</strong> 和若干个 <strong>不同大小的盘子</strong>。盘子最初按照大小顺序堆叠在一根柱子上，最小的盘子在最顶层，最大的盘子在最底层。</p>
+<p>目标是将所有盘子从 <strong>起始柱</strong>（起始杆）移动到 <strong>目标柱</strong>（目标杆），遵循以下的规则。</p>
+<ol>
+<li><strong>一次只能移动一个盘子。</strong>
+     每次只能移动柱子上最上面（也就是最小）的盘子。</li>
+<li><strong>每次移动必须将盘子从一个柱子移动到另一个柱子。</strong>
+     你只能把盘子从一个柱子拿起来，移动到另一柱子上。</li>
+<li><strong>不能把大盘子放到小盘子上面。</strong>
+     每次移动盘子时，必须保证目标柱上的盘子按照从大到小的顺序排列。换句话说，大盘子永远不能在小盘子上面。</li>
+<li><strong>最终目标：</strong>
+     将所有盘子从 <strong>起始柱</strong> 移动到 <strong>目标柱</strong>，同时满足上述规则。</li>
+</ol>
+<p>代码实现：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">print_move</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Print instructions to move a disk."""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Move the top disk from rod"</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="s2">"to rod"</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">move_stack</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Print the moves required to move n disks on the start pole to the end</span>
+<span class="sd">    pole without violating the rules of Towers of Hanoi.</span>
+
+<span class="sd">    n -- number of disks</span>
+<span class="sd">    start -- a pole position, either 1, 2, or 3</span>
+<span class="sd">    end -- a pole position, either 1, 2, or 3</span>
+
+<span class="sd">    There are exactly three poles, and start and end must be different. Assume</span>
+<span class="sd">    that the start pole has at least n disks of increasing size, and the end</span>
+<span class="sd">    pole is either empty or has a top disk larger than the top n start disks.</span>
+
+<span class="sd">    &gt;&gt;&gt; move_stack(1, 1, 3)</span>
+<span class="sd">    Move the top disk from rod 1 to rod 3</span>
+<span class="sd">    &gt;&gt;&gt; move_stack(2, 1, 3)</span>
+<span class="sd">    Move the top disk from rod 1 to rod 2</span>
+<span class="sd">    Move the top disk from rod 1 to rod 3</span>
+<span class="sd">    Move the top disk from rod 2 to rod 3</span>
+<span class="sd">    &gt;&gt;&gt; move_stack(3, 1, 3)</span>
+<span class="sd">    Move the top disk from rod 1 to rod 3</span>
+<span class="sd">    Move the top disk from rod 1 to rod 2</span>
+<span class="sd">    Move the top disk from rod 3 to rod 2</span>
+<span class="sd">    Move the top disk from rod 1 to rod 3</span>
+<span class="sd">    Move the top disk from rod 2 to rod 1</span>
+<span class="sd">    Move the top disk from rod 2 to rod 3</span>
+<span class="sd">    Move the top disk from rod 1 to rod 3</span>
+<span class="sd">    """</span>
+    <span class="k">assert</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">end</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">start</span> <span class="o">!=</span> <span class="n">end</span><span class="p">,</span> <span class="s2">"Bad start/end"</span>
+    <span class="s2">"*** YOUR CODE HERE ***"</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">print_move</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">move_stack</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="mi">6</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="n">end</span><span class="p">)</span>    
+        <span class="n">print_move</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">)</span>
+        <span class="n">move_stack</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="n">end</span><span class="p">,</span><span class="n">end</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>通过这个问题 理解到</p>
+<p><strong>递归 = 找到一个问题的自相似结构（大问题由更小的同类问题构成），并利用小问题的答案来组合成大问题的答案，直到最终缩到无法再缩的基本情况。</strong></p>
+<p>~~并不需要分析复杂问题的各种情况~~</p>
+</blockquote>
+<hr/>
+<h4>无名递归</h4>
+<p>在这一题中，你需要写出一个 <strong>没有名字</strong> 的 <strong>递归函数</strong>。
+ 你不能使用：</p>
+<ul>
+<li><code>def</code></li>
+<li>任何赋值（<code>=</code>）</li>
+<li>任何形式的给函数起名字</li>
+<li>不能出现直接递归的函数调用（例如 <code>fact(n-1)</code>）</li>
+</ul>
+<p>然而你需要实现：</p>
+<div class="codehilite"><pre><span></span><code>make_anonymous_factorial()(n)
+</code></pre></div>
+<p>的值等于 <code>n!</code></p>
+<p>代码实现：</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">sub</span><span class="p">,</span> <span class="n">mul</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_anonymous_factorial</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Return the value of an expression that computes factorial.</span>
+
+<span class="sd">    &gt;&gt;&gt; make_anonymous_factorial()(5)</span>
+<span class="sd">    120</span>
+<span class="sd">    &gt;&gt;&gt; from construct_check import check</span>
+<span class="sd">    &gt;&gt;&gt; # ban any assignments or recursion</span>
+<span class="sd">    &gt;&gt;&gt; check(SOURCE_FILE, 'make_anonymous_factorial',</span>
+<span class="sd">    ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">x</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div>
+<ul>
+<li><strong>第一个 <code>()</code> 是给外层函数传参数，用来填入 maker（或 f）</strong></li>
+<li><strong>第二个 <code>(5)</code> 是给内层返回的函数传参数，也就是 n</strong></li>
+</ul>
+<p>换句话说：</p>
+<div class="codehilite"><pre><span></span><code><span class="n">make_anonymous_factorial</span><span class="p">()</span>
+            <span class="err">↑</span>   <span class="n">给外层函数传参数</span><span class="err">（</span><span class="n">maker</span> <span class="o">/</span> <span class="n">f</span><span class="err">）</span>
+<span class="n">make_anonymous_factorial</span><span class="p">()(</span><span class="mi">5</span><span class="p">)</span>
+                        <span class="err">↑</span>  <span class="n">给内层函数传参数</span><span class="err">（</span><span class="n">n</span><span class="err">）</span>
+</code></pre></div>
+<hr/>
+<h2 id="Week5">Week5</h2>
+<h3 id="lab03:-Recursion,-Python-Lists">lab03: Recursion, Python Lists</h3>
+<h4>Q6: Squares Only</h4>
+<blockquote>
+<p>Implement the function <code>squares</code>, which takes in a list of positive integers. It returns a list that contains the square roots of the elements of the original list that are perfect squares. Use a list comprehension.</p>
+</blockquote>
+<p><strong>错误代码</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">squares</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Returns a new list containing square roots of the elements of the</span>
+<span class="sd">    original list that are perfect squares.</span>
+
+<span class="sd">    &gt;&gt;&gt; seq = [8, 49, 8, 9, 2, 1, 100, 102]</span>
+<span class="sd">    &gt;&gt;&gt; squares(seq)</span>
+<span class="sd">    [7, 3, 1, 10]</span>
+<span class="sd">    &gt;&gt;&gt; seq = [500, 30]</span>
+<span class="sd">    &gt;&gt;&gt; squares(seq)</span>
+<span class="sd">    []</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="nb">int</span><span class="p">)]</span>
+</code></pre></div>
+<p><strong>错误原因：sqrt（）是数学函数 自然返回float 故应改变sqrt类型后用round（）函数</strong></p>
+<p><strong>改正后：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">squares</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Returns a new list containing square roots of the elements of the</span>
+<span class="sd">    original list that are perfect squares.</span>
+
+<span class="sd">    &gt;&gt;&gt; seq = [8, 49, 8, 9, 2, 1, 100, 102]</span>
+<span class="sd">    &gt;&gt;&gt; squares(seq)</span>
+<span class="sd">    [7, 3, 1, 10]</span>
+<span class="sd">    &gt;&gt;&gt; seq = [500, 30]</span>
+<span class="sd">    &gt;&gt;&gt; squares(seq)</span>
+<span class="sd">    []</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">==</span><span class="nb">round</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))]</span>
+</code></pre></div>
+<hr/>
+<h4>Q8: Making Onions</h4>
+<blockquote>
+<p>Write a function <code>make_onion</code> that takes in two one-argument functions, <code>f</code> and <code>g</code>. It returns a function that takes in three arguments: <code>x</code>, <code>y</code>, and <code>limit</code>. The returned function returns <code>True</code> if it is possible to reach <code>y</code> from <code>x</code> using up to <code>limit</code> calls to <code>f</code> and <code>g</code>, and <code>False</code> otherwise.</p>
+</blockquote>
+<p>For example, if <code>f</code> adds 1 and <code>g</code> doubles, then it is possible to reach 25 from 5 in four calls: <code>f(g(g(f(5))))</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_onion</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return a function can_reach(x, y, limit) that returns</span>
+<span class="sd">    whether some call expression containing only f, g, and x with</span>
+<span class="sd">    up to limit calls will give the result y.</span>
+
+<span class="sd">    &gt;&gt;&gt; up = lambda x: x + 1</span>
+<span class="sd">    &gt;&gt;&gt; double = lambda y: y * 2</span>
+<span class="sd">    &gt;&gt;&gt; can_reach = make_onion(up, double)</span>
+<span class="sd">    &gt;&gt;&gt; can_reach(5, 25, 4)      # 25 = up(double(double(up(5))))</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; can_reach(5, 25, 3)      # Not possible</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; can_reach(1, 1, 0)      # 1 = 1</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; add_ing = lambda x: x + "ing"</span>
+<span class="sd">    &gt;&gt;&gt; add_end = lambda y: y + "end"</span>
+<span class="sd">    &gt;&gt;&gt; can_reach_string = make_onion(add_ing, add_end)</span>
+<span class="sd">    &gt;&gt;&gt; can_reach_string("cry", "crying", 1)      # "crying" = add_ing("cry")</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; can_reach_string("un", "unending", 3)     # "unending" = add_ing(add_end("un"))</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; can_reach_string("peach", "folding", 4)   # Not possible</span>
+<span class="sd">    False</span>
+<span class="sd">    """</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_reach</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">limit</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">can_reach</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">limit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="n">can_reach</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">limit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">can_reach</span>
+</code></pre></div>
+<blockquote>
+<p><strong>or的机制：并非一般的布尔或，若第一个表达式为真则返回第一个 若第一个为假则无论第二个真假均返回第二个表达式</strong></p>
+</blockquote>
+<hr/>
+<h4>Q9: Ten-Pairs</h4>
+<p>Write a function that takes a positive integer <code>n</code> and returns the number of ten-pairs it contains. A ten-pair is a pair of digits within <code>n</code> that sums to 10.</p>
+<p>The number 7,823,952 has 3 ten-pairs. The first and fourth digits sum to 7+3=10, the second and third digits sum to 8+2=10, and the second and last digit sum to 8+2=10.</p>
+<p>Important notes:</p>
+<ul>
+<li>A digit can be part of more than one ten-pair.</li>
+<li>One 5 does not make a ten-pair with itself.</li>
+</ul>
+<blockquote>
+<p><em>Recommended</em>: Complete and use the helper function <code>count_digit</code> to calculate how many times a digit appears in <code>n</code>.</p>
+</blockquote>
+<p><strong>Important:</strong> Use recursion; the tests will fail if you use any loops (for, while).</p>
+<p><strong>听从建议构造辅助函数代码：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">ten_pairs</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return the number of ten-pairs within positive integer n.</span>
+
+<span class="sd">    &gt;&gt;&gt; ten_pairs(7823952) # 7+3, 8+2, and 8+2</span>
+<span class="sd">    3</span>
+<span class="sd">    &gt;&gt;&gt; ten_pairs(55055)</span>
+<span class="sd">    6</span>
+<span class="sd">    &gt;&gt;&gt; ten_pairs(9641469) # 9+1, 6+4, 6+4, 4+6, 1+9, 4+6 </span>
+<span class="sd">    6</span>
+<span class="sd">    &gt;&gt;&gt; # ban iteration</span>
+<span class="sd">    &gt;&gt;&gt; from construct_check import check</span>
+<span class="sd">    &gt;&gt;&gt; check(SOURCE_FILE, 'ten_pairs', ['While', 'For'])</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="s2">"*** YOUR CODE HERE ***"</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ten_pairs</span><span class="p">(</span><span class="n">n</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="n">count_digit</span><span class="p">(</span><span class="n">n</span><span class="o">//</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="o">-</span><span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="p">)</span>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">count_digit</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">digit</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return how many times digit appears in n.</span>
+
+<span class="sd">    &gt;&gt;&gt; count_digit(55055, 5) # digit 5 appears 4 times in 55055</span>
+<span class="sd">    4</span>
+<span class="sd">    &gt;&gt;&gt; from construct_check import check</span>
+<span class="sd">    &gt;&gt;&gt; # ban iteration</span>
+<span class="sd">    &gt;&gt;&gt; check(SOURCE_FILE, 'count_digits', ['While', 'For'])</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="s2">"*** YOUR CODE HERE ***"</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span> <span class="o">==</span> <span class="n">digit</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">count_digit</span><span class="p">(</span><span class="n">n</span><span class="o">//</span><span class="mi">10</span><span class="p">,</span><span class="n">digit</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span><span class="k">return</span> <span class="n">count_digit</span><span class="p">(</span><span class="n">n</span><span class="o">//</span><span class="mi">10</span><span class="p">,</span><span class="n">digit</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>实现目标函数的代码非常简洁，思路清晰</p>
+</blockquote>
+<p><strong>仅使用ten_pairs()代码：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">ten_pairs</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="n">last</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">10</span>          <span class="c1"># 固定当前 digit</span>
+    <span class="n">rest</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">10</span>         <span class="c1"># 剩余部分</span>
+
+    <span class="c1"># 内部递归：统计 rest 中有多少个数字与 last 配对成 10</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count_pairs</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">last</span> <span class="o">==</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">count_pairs</span><span class="p">(</span><span class="n">x</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># 总数 =（rest 中与 last 配对的数量）+ （递归处理 rest 的 ten_pairs）</span>
+    <span class="k">return</span> <span class="n">count_pairs</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span> <span class="o">+</span> <span class="n">ten_pairs</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>递归树做法 较推荐做法复杂 思路简单</p>
+<ul>
+<li>
+<p>最外层固定 <strong>n 的最后一位 digit1 = n % 10</strong></p>
+</li>
+<li>
+<p>内层函数 <strong>digit(x)</strong> 去遍历 n 的剩余部分（即 x=n//10）</p>
+</li>
+<li>
+<p>如果出现 x%10 + digit1 == 10 就计数</p>
+</li>
+<li>
+<p>然后再递归到下一位</p>
+</li>
+</ul>
+<hr/>
+</blockquote>
+<p>11222</p>
+<p>​   </p>
+<p>​   </p>
+</div>
+
+</body>
+</html>
